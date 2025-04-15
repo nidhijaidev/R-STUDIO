@@ -1,0 +1,88 @@
+---
+title: "CIA-3"
+author: "Nidhi Jaidev"
+date: "2025-04-13"
+output: html_document
+---
+---
+title: "Chi-Squared Test"
+author: "Nidhi Jaidev"
+date: "2025-04-07"
+output: html_document
+---
+
+
+
+```{r setup, message=FALSE, warning=FALSE}
+# Load necessary libraries
+# Load libraries
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(knitr)
+
+
+##Social Concern: swiss Data
+
+```{r load_data}
+
+# Load dataset
+data(swiss)
+
+# Convert row names to a column
+swiss$Province <- rownames(swiss)
+```
+# Bar chart for Education
+
+```{r}
+ggplot(swiss, aes(x = reorder(Province, -Education), y = Education)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(title = "Education Level by Province", x = "Province", y = "Education (%)")
+
+```
+
+#Environmental Concern: CO2 Dataset
+
+```{r load_data}
+
+#Load dataset
+data(CO2)
+
+``` 
+  
+# Line chart of CO2 uptake
+
+```{r}
+ggplot(CO2, aes(x = conc, y = uptake, color = Type)) +
+  geom_line(aes(group = interaction(Plant, Type)), alpha = 0.5) +
+  geom_smooth(method = "loess", se = FALSE) +
+  labs(title = "CO2 Uptake by Concentration", x = "CO2 Concentration", y = "Uptake Rate")
+
+```
+
+#Societal Concern: gapminder Dataset
+
+# Install and load gapminder
+install.packages("gapminder")
+library(gapminder)
+library(dplyr)
+
+
+```{r load_data}
+
+# Filter data for 2007
+data_2007 <- subset(gapminder, year == 2007)
+
+
+```
+# Scatter plot
+
+```{r}
+plot(data_2007$gdpPercap, data_2007$lifeExp,
+     log = "x",
+     col = "blue",
+     pch = 16,
+     main = "Life Expectancy vs GDP (2007)",
+     xlab = "GDP per Capita (log scale)",
+     ylab = "Life Expectancy")
+```
